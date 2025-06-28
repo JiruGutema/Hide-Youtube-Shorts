@@ -62,3 +62,9 @@ Email: jirudagutema@gmail.com
 ## Disclaimer
 
 This extension is not affiliated with YouTube or Google. Use at your own discretion.
+
+## Why This Extension?
+
+There is no way to bypass this rule of this extension. there are alternative extensions there but they are not removing all of them you can bypass dynamically. ex. using dynamic routes like `https://www.youtube.com/shorts/` or `https://www.youtube.com/shorts/abc123` and they are not removing the shorts from the homepage, sidebar, and other places. This extension is designed to remove all of them.
+
+
