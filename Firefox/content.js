@@ -35,9 +35,36 @@ function removeAllShorts() {
   }
 }
 
-// Initial run to remove Shorts on page load
-removeAllShorts();
+function removeRedditAds() {
+  // Remove Reddit dynamic ad containers
+  document.querySelectorAll('shreddit-dynamic-ad-link').forEach(el => el.remove());
+}
+removeQouraAds = () => {
+  // q-box dom_annotate_multifeed_bundle_AdBundle qu-borderAll qu-borderColor--raised qu-boxShadow--small qu-mb--small qu-bg--raised
+  document.querySelectorAll('q-box[dom_annotate_multifeed_bundle_AdBundle]').forEach(el => el.remove());
+};
 
-// Observe DOM changes and remove Shorts dynamically as new elements are added
-const observer = new MutationObserver(removeAllShorts);
+// Initial run to remove Shorts on page load
+if (window.location.hostname.includes('youtube.com')) {
+  removeAllShorts();
+}
+else if (window.location.hostname.includes('reddit.com')) {
+  removeRedditAds();
+}
+else if (window.location.hostname.includes('quora.com')) {
+  removeQouraAds();
+}
+
+// Observe DOM changes and remove elements dynamically as new elements are added
+const observer = new MutationObserver(() => {
+  if (window.location.hostname.includes('youtube.com')) {
+    removeAllShorts();
+  }
+  else if (window.location.hostname.includes('reddit.com')) {
+    removeRedditAds();
+  }
+  else if (window.location.hostname.includes('quora.com')) {
+    removeQouraAds();
+  }
+});
 observer.observe(document.body, { childList: true, subtree: true });
