@@ -4,47 +4,38 @@ A lightweight Firefox and Chrome extension that removes YouTube Shorts from your
 
 ## Features
 
-- **Complete Shorts Removal**: Eliminates Shorts from homepage, sidebar, and dedicated Shorts pages
-- **Real-time Detection**: Automatically removes Shorts as they load dynamically
-- **Performance Optimized**: Debounced execution prevents excessive processing
-- **Error Resilient**: Built-in error handling ensures stable operation
-- **Minimal Footprint**: Lightweight code with no external dependencies
+* **Complete Shorts Removal**: Eliminates Shorts from homepage, sidebar, and dedicated Shorts pages
+* **Real-time Detection**: Automatically removes Shorts as they load dynamically
+* **Performance Optimized**: Debounced execution prevents excessive processing
+* **Error Resilient**: Built-in error handling ensures stable operation
+* **Minimal Footprint**: Lightweight code with no external dependencies
 
 ## Installation
 
-### Manual Installation (Developer Mode)
+You can install the extension directly from the Mozilla Add-ons store:
 
-1. Download or clone this repository
-2. Open Firefox and navigate to `about:debugging`
-3. Click "This Firefox" in the left sidebar
-4. Click "Load Temporary Add-on"
-5. Select the `manifest.json` file from the extension directory
-6. The extension will be active immediately
-
-### Firefox and Chrome Add-ons Store
-
-*Coming soon - pending Mozilla review*
+[Hide YouTube Shorts on Mozilla Add-ons](https://addons.mozilla.org/…/hide-youtube-short)
 
 ## How It Works
 
 The extension uses content script injection to:
 
-- Target specific YouTube Shorts elements using CSS selectors
-- Remove Shorts shelves, reels, and navigation links
-- Replace the Shorts page with a custom message
-- Monitor DOM changes for dynamically loaded content
+* Target specific YouTube Shorts elements using CSS selectors
+* Remove Shorts shelves, reels, and navigation links
+* Replace the Shorts page with a custom message
+* Monitor DOM changes for dynamically loaded content
 
 ## Technical Details
 
-- **Manifest Version**: 2
-- **Permissions**: Active tabs on YouTube domains
-- **Content Script**: Runs on all YouTube pages
-- **Performance**: Debounced execution (100ms delay)
+* **Manifest Version**: 2
+* **Permissions**: Active tabs on YouTube domains
+* **Content Script**: Runs on all YouTube pages
+* **Performance**: Debounced execution (100ms delay)
 
 ## Browser Compatibility
 
-- Firefox
-- Chrome
+* Firefox
+* Chrome
 
 ## Contributing
 
@@ -56,8 +47,8 @@ MIT License - see LICENSE file for details
 
 ## Author
 
-**Jiru Gutema**  
-Email: jirudagutema@gmail.com
+**Jiru Gutema**
+Email: [jirudagutema@gmail.com](mailto:jirudagutema@gmail.com)
 
 ## Disclaimer
 
@@ -65,6 +56,5 @@ This extension is not affiliated with YouTube or Google. Use at your own discret
 
 ## Why This Extension?
 
-There is no way to bypass this rule of this extension. there are alternative extensions there but they are not removing all of them you can bypass dynamically. ex. using dynamic routes like `https://www.youtube.com/shorts/` or `https://www.youtube.com/shorts/abc123` and they are not removing the shorts from the homepage, sidebar, and other places. This extension is designed to remove all of them.
-
+There is no way to bypass this rule of this extension. There are alternative extensions but they do not remove all Shorts and can be bypassed dynamically, for example using dynamic routes like `https://www.youtube.com/shorts/` or `https://www.youtube.com/shorts/abc123`, and redirecting `youtube/shorts`to `youtube/`. They also do not remove Shorts from the homepage, sidebar, and other places. This extension is designed to remove all of them.
 

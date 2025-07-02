@@ -3,12 +3,22 @@
   "name": "Hide YouTube Shorts",
   "version": "1.0",
   "description": "Hides the Shorts section on the YouTube homepage",
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+  "browser_action": {
+    "default_icon": "logo.png",
+    "default_title": "Hide YouTube Shorts"
+  },
   "content_scripts": [
     {
       "matches": [
         "*://www.youtube.com/*",
         "*://www.reddit.com/*",
-        "*://www.quora.com/*"
+        "*://www.quora.com/*",
+        "*://wwww.aliexpress.com/*"
       ],
       "js": [
         "content.js"
