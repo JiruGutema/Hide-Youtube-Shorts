@@ -14,7 +14,7 @@ A lightweight Firefox and Chrome extension that removes YouTube Shorts from your
 
 You can install the extension directly from the Mozilla Add-ons store:
 
-[Hide YouTube Shorts on Mozilla Add-ons](https://addons.mozilla.org/…/hide-youtube-short)
+[Hide YouTube Shorts on Mozilla Add-ons](https://addons.mozilla.org/en-US/firefox/addon/hide-youtube-short)
 
 ## How It Works
 
