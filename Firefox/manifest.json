@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Hide YouTube Shorts",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Hides the Shorts section on the YouTube homepage",
   "icons": {
     "16": "logo.png",
@@ -17,8 +17,7 @@
       "matches": [
         "*://www.youtube.com/*",
         "*://www.reddit.com/*",
-        "*://www.quora.com/*",
-        "*://wwww.aliexpress.com/*"
+        "*://www.quora.com/*"
       ],
       "js": [
         "content.js"
