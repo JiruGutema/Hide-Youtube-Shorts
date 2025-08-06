@@ -12,11 +12,14 @@ const SHORTS_SELECTORS = [
   '#shorts-container'                   // Shorts container (legacy or fallback)
 ];
 
+let isEnabled = true;
+
 /**
  * Removes all visible Shorts elements from the page and sidebar.
  * Also redirects away from Shorts video pages.
  */
 function removeAllShorts() {
+  if (!isEnabled) return;
   // Remove main Shorts shelves from homepage
   SHORTS_SELECTORS.forEach(selector => {
     document.querySelectorAll(selector).forEach(el => el.remove());
@@ -35,36 +38,36 @@ function removeAllShorts() {
   }
 }
 
-function removeRedditAds() {
-  // Remove Reddit dynamic ad containers
-  document.querySelectorAll('shreddit-dynamic-ad-link').forEach(el => el.remove());
-}
-removeQouraAds = () => {
-  // q-box dom_annotate_multifeed_bundle_AdBundle qu-borderAll qu-borderColor--raised qu-boxShadow--small qu-mb--small qu-bg--raised
-  document.querySelectorAll('q-box[dom_annotate_multifeed_bundle_AdBundle]').forEach(el => el.remove());
+// Initial run to remove Shorts on page load
+const init = () => {
+  browser.storage.local.get('isEnabled', (data) => {
+    isEnabled = data.isEnabled !== false;
+    if (isEnabled) {
+      removeAllShorts();
+      observer.observe(document.body, { childList: true, subtree: true });
+    }
+  });
 };
 
-// Initial run to remove Shorts on page load
-if (window.location.hostname.includes('youtube.com')) {
-  removeAllShorts();
-}
-else if (window.location.hostname.includes('reddit.com')) {
-  removeRedditAds();
-}
-else if (window.location.hostname.includes('quora.com')) {
-  removeQouraAds();
-}
-
-// Observe DOM changes and remove elements dynamically as new elements are added
-const observer = new MutationObserver(() => {
-  if (window.location.hostname.includes('youtube.com')) {
-    removeAllShorts();
-  }
-  else if (window.location.hostname.includes('reddit.com')) {
-    removeRedditAds();
-  }
-  else if (window.location.hostname.includes('quora.com')) {
-    removeQouraAds();
+// Listen for changes in the toggle state
+browser.storage.onChanged.addListener((changes, area) => {
+  if (area === 'local' && changes.isEnabled) {
+    isEnabled = changes.isEnabled.newValue;
+    if (isEnabled) {
+      removeAllShorts();
+      observer.observe(document.body, { childList: true, subtree: true });
+    } else {
+      observer.disconnect();
+      // Note: This will not restore already removed elements on the current page.
+      // A page refresh would be needed to see the Shorts again.
+    }
   }
 });
-observer.observe(document.body, { childList: true, subtree: true });
+
+const observer = new MutationObserver(() => {
+    if (isEnabled) {
+      removeAllShorts();
+    }
+});
+
+init();

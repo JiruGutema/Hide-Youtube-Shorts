@@ -12,11 +12,14 @@ const SHORTS_SELECTORS = [
   '#shorts-container'                   // Shorts container (legacy or fallback)
 ];
 
+let isEnabled = true;
+
 /**
  * Removes all visible Shorts elements from the page and sidebar.
  * Also redirects away from Shorts video pages.
  */
 function removeAllShorts() {
+  if (!isEnabled) return;
   // Remove main Shorts shelves from homepage
   SHORTS_SELECTORS.forEach(selector => {
     document.querySelectorAll(selector).forEach(el => el.remove());
@@ -36,8 +39,35 @@ function removeAllShorts() {
 }
 
 // Initial run to remove Shorts on page load
-removeAllShorts();
+const init = () => {
+  browser.storage.local.get('isEnabled', (data) => {
+    isEnabled = data.isEnabled !== false;
+    if (isEnabled) {
+      removeAllShorts();
+      observer.observe(document.body, { childList: true, subtree: true });
+    }
+  });
+};
 
-// Observe DOM changes and remove Shorts dynamically as new elements are added
-const observer = new MutationObserver(removeAllShorts);
-observer.observe(document.body, { childList: true, subtree: true });
+// Listen for changes in the toggle state
+browser.storage.onChanged.addListener((changes, area) => {
+  if (area === 'local' && changes.isEnabled) {
+    isEnabled = changes.isEnabled.newValue;
+    if (isEnabled) {
+      removeAllShorts();
+      observer.observe(document.body, { childList: true, subtree: true });
+    } else {
+      observer.disconnect();
+      // Note: This will not restore already removed elements on the current page.
+      // A page refresh would be needed to see the Shorts again.
+    }
+  }
+});
+
+const observer = new MutationObserver(() => {
+    if (isEnabled) {
+      removeAllShorts();
+    }
+});
+
+init();
