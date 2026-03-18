@@ -1,5 +1,5 @@
 // Author: Jiru Gutema
-// Date: 2023-10-01
+// Date: 2025-06-29
 
 // Hide YouTube Shorts Extension Content Script
 // This script removes YouTube Shorts from the homepage, sidebar, and redirects Shorts video pages to the homepage.
